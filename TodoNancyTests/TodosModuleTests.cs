@@ -29,7 +29,7 @@
         [Fact]
         public void ShouldReturnEmptyListOnGetWhenNoTodosHaveBeenPosted()
         {
-            var actual = sut.Get("/todos", with => with.Accept("application/xml"));
+            var actual = sut.Get("/todos", with => with.Accept("application/json"));
 
             Check.That(HttpStatusCode.OK).Equals(actual.StatusCode);
             Check.That(actual.Body.DeserializeJson<Todo[]>()).IsEmpty();
@@ -58,7 +58,7 @@
         {
             var actual = sut.Post("/todos/", with => with.JsonBody(aTodo))
                             .Then
-                            .Get("/todos/", with => with.Accept("application/xml"));
+                            .Get("/todos/", with => with.Accept("application/json"));
             var actualBody = actual.Body.DeserializeJson<Todo[]>();
 
             Check.That(1).Equals(actualBody.Length);
@@ -72,7 +72,7 @@
                             .Then
                             .Put("/todos/1", with => with.JsonBody(anEditedTodo))
                             .Then
-                            .Get("/todos/", with => with.Accept("application/xml"));
+                            .Get("/todos/", with => with.Accept("application/json"));
 
             var actualBody = actual.Body.DeserializeJson<Todo[]>();
 
@@ -87,7 +87,7 @@
                             .Then
                             .Delete("/todos/1")
                             .Then
-                            .Get("/todos/", with => with.Accept("application/xml"));
+                            .Get("/todos/", with => with.Accept("application/json"));
 
             Check.That(HttpStatusCode.OK).Equals(actual.StatusCode);
             Check.That(actual.Body.DeserializeJson<Todo[]>());
@@ -100,6 +100,9 @@
             Check.That(expected.completed).Equals(actual.completed);
         }
 
+        /**
+         * XML Serialization seems broken, don't know why
+         */
         [Fact]
         public void ShouldBeAbleToGetPostedXmlTodo()
         {
