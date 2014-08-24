@@ -29,7 +29,7 @@
         [Fact]
         public void ShouldReturnEmptyListOnGetWhenNoTodosHaveBeenPosted()
         {
-            var actual = sut.Get("/todos");
+            var actual = sut.Get("/todos", with => with.Accept("application/xml"));
 
             Check.That(HttpStatusCode.OK).Equals(actual.StatusCode);
             Check.That(actual.Body.DeserializeJson<Todo[]>()).IsEmpty();
@@ -58,7 +58,7 @@
         {
             var actual = sut.Post("/todos/", with => with.JsonBody(aTodo))
                             .Then
-                            .Get("/todos/");
+                            .Get("/todos/", with => with.Accept("application/xml"));
             var actualBody = actual.Body.DeserializeJson<Todo[]>();
 
             Check.That(1).Equals(actualBody.Length);
@@ -72,7 +72,7 @@
                             .Then
                             .Put("/todos/1", with => with.JsonBody(anEditedTodo))
                             .Then
-                            .Get("/todos/");
+                            .Get("/todos/", with => with.Accept("application/xml"));
 
             var actualBody = actual.Body.DeserializeJson<Todo[]>();
 
@@ -87,7 +87,7 @@
                             .Then
                             .Delete("/todos/1")
                             .Then
-                            .Get("/todos/");
+                            .Get("/todos/", with => with.Accept("application/xml"));
 
             Check.That(HttpStatusCode.OK).Equals(actual.StatusCode);
             Check.That(actual.Body.DeserializeJson<Todo[]>());
@@ -101,22 +101,40 @@
         }
 
         [Fact]
-        public void ShouldBeAbleToGetViewWithPostedTodo()
+        public void ShouldBeAbleToGetPostedXmlTodo()
         {
             var actual = sut.Post("/todos/", with =>
             {
-                with.JsonBody(aTodo);
-                with.Accept("application/json");
+                with.XMLBody(aTodo);
+                with.Accept("application/xml");
             })
             .Then
-            .Get("/todos", with => with.Accept("text/html"));
+            .Get("/todos/", with =>
+            {
+                with.Accept("application/json");
+            });
 
-            actual.Body["title"].AllShouldContain("Todos");
-            actual.Body["tr#1 td:first-child"]
-                .ShouldExistOnce()
-                .And
-                .ShouldContain(aTodo.title);
+            var actualBody = actual.Body.DeserializeJson<Todo[]>();
 
+            Check.That(actualBody.Length).Equals(1);
+            CheckAreSame(aTodo, actualBody[0]);
+        }
+
+        [Fact]
+        public void ShouldBeAbleToGetPostedTodoAsXml()
+        {
+            var actual = sut.Post("/todos/", with =>
+            {
+                with.XMLBody(aTodo);
+                with.Accept("application/xml");
+            })
+            .Then
+            .Get("/todos/", with => with.Accept("application/xml"));
+
+            var actualBody = actual.Body.DeserializeXml<Todo[]>();
+
+            Check.That(actualBody.Length).Equals(1);
+            CheckAreSame(aTodo, actualBody[0]);
         }
     }
 }
