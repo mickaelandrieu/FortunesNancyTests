@@ -1,11 +1,13 @@
 ﻿namespace TodoNancyTests
 {
+    using CsQuery.ExtensionMethods;
     using Nancy;
     using Nancy.Testing;
     using Xunit;
     using NFluent;
     using TodoNancy;
     using MongoDB.Driver;
+    using MongoDB.Driver.Builders;
 
     public class TodosModuleTests
     {
@@ -15,10 +17,11 @@
 
         public TodosModuleTests()
         {
-            var database = MongoDatabase.Create("mongodb://localhost:27017/todos");
+            var mongoClient = new MongoClient("mongodb://localhost:27017/todos");
+            var database = mongoClient.GetServer().GetDatabase("todos");
             database.Drop();
 
-            sut = new Browser(new DefaultNancyBootstrapper());
+            sut = new Browser(new Bootstrapper());
             aTodo = new Todo{ title = "task 1", order = 0, completed = false };
             anEditedTodo = new Todo{ id = 42, title = "edited title", order = 0, completed = false };
         }
@@ -95,6 +98,25 @@
             Check.That(expected.title).Equals(actual.title);
             Check.That(expected.order).Equals(actual.order);
             Check.That(expected.completed).Equals(actual.completed);
+        }
+
+        [Fact]
+        public void ShouldBeAbleToGetViewWithPostedTodo()
+        {
+            var actual = sut.Post("/todos/", with =>
+            {
+                with.JsonBody(aTodo);
+                with.Accept("application/json");
+            })
+            .Then
+            .Get("/todos", with => with.Accept("text/html"));
+
+            actual.Body["title"].AllShouldContain("Todos");
+            actual.Body["tr#1 td:first-child"]
+                .ShouldExistOnce()
+                .And
+                .ShouldContain(aTodo.title);
+
         }
     }
 }
