@@ -21,3 +21,8 @@ C:\Users\Mickael\Documents\Visual Studio 2013\Projects\TodoNancyTests\TodoNancyT
 C:\Users\Mickael\Documents\Visual Studio 2013\Projects\TodoNancyTests\TodoNancyTests\obj\Debug\TodoNancyTests.csprojResolveAssemblyReference.cache
 C:\Users\Mickael\Documents\Visual Studio 2013\Projects\TodoNancyTests\TodoNancyTests\obj\Debug\TodoNancyTests.dll
 C:\Users\Mickael\Documents\Visual Studio 2013\Projects\TodoNancyTests\TodoNancyTests\obj\Debug\TodoNancyTests.pdb
+C:\Users\Mickael\Documents\Visual Studio 2013\Projects\TodoNancyTests\TodoNancyTests\bin\Debug\TodoNancyTests.dll.config
+C:\Users\Mickael\Documents\Visual Studio 2013\Projects\TodoNancyTests\TodoNancyTests\bin\Debug\Nancy.ViewEngines.Razor.dll
+C:\Users\Mickael\Documents\Visual Studio 2013\Projects\TodoNancyTests\TodoNancyTests\bin\Debug\System.Web.Razor.dll
+C:\Users\Mickael\Documents\Visual Studio 2013\Projects\TodoNancyTests\TodoNancyTests\bin\Debug\Nancy.ViewEngines.Razor.xml
+C:\Users\Mickael\Documents\Visual Studio 2013\Projects\TodoNancyTests\TodoNancyTests\bin\Debug\System.Web.Razor.xml

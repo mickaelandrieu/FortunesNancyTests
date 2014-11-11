@@ -1,17 +1,17 @@
-﻿namespace TodoNancyTests
+﻿namespace FortunesNancyTests
 {
     using Nancy;
     using Nancy.Testing;
     using Xunit;
     using NFluent;
     using FakeItEasy;
-    using TodoNancy;
+    using FortunesNancy;
 
     public class DataStoreTests
     {
         private readonly IDataStore fakeDataStore;
         private Browser sut;
-        private readonly Todo aTodo;
+        private readonly Fortune aFortune;
 
         public DataStoreTests()
         {
@@ -19,7 +19,7 @@
             sut = new Browser(with =>
             {
                 with.Dependency(fakeDataStore);
-                with.Module<TodosModule>();
+                with.Module<FortunesModule>();
             });
 
             aTodo = new Todo() { id = 5, title = "task 10", order = 100, completed = true };

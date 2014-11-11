@@ -4,7 +4,7 @@
     using Nancy.Testing;
     using Xunit;
     using NFluent;
-    using TodoNancy;
+    using FortunesNancy;
 
     public class HomeModuleTests
     {

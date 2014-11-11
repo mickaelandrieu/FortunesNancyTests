@@ -1,0 +1,2 @@
+C:\Users\Mickael\Documents\Visual Studio 2013\Projects\TodoNancyTests\TodoNancyTests\obj\Debug\FortunesTests.csprojResolveAssemblyReference.cache
+C:\Users\Mickael\Documents\Visual Studio 2013\Projects\FortunesNancyTests\FortunesNancyTests\obj\Debug\FortunesTests.csprojResolveAssemblyReference.cache

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Web
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoNancyTests", "TodoNancyTests\TodoNancyTests.csproj", "{A45327FC-6634-4CEC-BE86-3DE0FC8A0DE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortunesNancyTests", "FortunesNancyTests\FortunesNancyTests.csproj", "{A45327FC-6634-4CEC-BE86-3DE0FC8A0DE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoNancy", "..\TodoNancy\TodoNancy\TodoNancy.csproj", "{D9059460-FB18-479B-8CCF-CE814105F1CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FortunesNancy", "..\FortunesNancy\FortunesNancy\FortunesNancy.csproj", "{D9059460-FB18-479B-8CCF-CE814105F1CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

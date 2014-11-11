@@ -1,11 +1,11 @@
-﻿namespace TodoNancyTests
+﻿namespace FortunesNancyTests
 {
     using CsQuery.ExtensionMethods;
     using Nancy;
     using Nancy.Testing;
     using Xunit;
     using NFluent;
-    using TodoNancy;
+    using FortunesNancy;
     using MongoDB.Driver;
     using MongoDB.Driver.Builders;
 
@@ -138,6 +138,21 @@
 
             Check.That(actualBody.Length).Equals(1);
             CheckAreSame(aTodo, actualBody[0]);
+        }
+
+        [Fact]
+        public void ShouldBeAbleToGetViewWithPostedTodo()
+        {
+            var actual = sut.Post("/todos", with =>
+            {
+                with.JsonBody(aTodo);
+                with.Accept("application/json");
+            })
+            .Then
+            .Get("todos/", with => with.Accept("text/html"));
+
+            Check.That(actual.Body["title"]).Contains("Todos");
+            Check.That(actual.Body["tr#1 td:first-child"]).ContainsExactly(aTodo.title);
         }
     }
 }
